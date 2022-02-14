@@ -6,10 +6,7 @@ import iconError from './death-star-error.png';
 const ErrorIndicator = () => {
     return (
         <div className="error-indicator">
-            <img
-                src={iconError}
-                alt="Error image"
-            />
+            <img src={iconError} alt='' />
             <span className="boom">Ooops!</span>
             <span>
                 Упс... Что-то пошло не так
