@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import './person-details.css';
 import SwapiService from "../../services/swapi-service";
+import Spinner from '../spinner';
 
 export default class PersonDetails extends Component {
 
