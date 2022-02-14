@@ -2,7 +2,6 @@
     display: flex;
     padding: 1rem;
     border: 1px solid #444;
-    margin-bottom: 1rem;
 }
 
 .random-planet .planet-image {
@@ -10,6 +9,34 @@
     height: 150px;
     border-radius: 10px;
     margin-right: 1rem;
+    min-height: 10rem;
+    display: block;
+    position: relative;
+    text-align: center;
+    white-space: pre-wrap;
+    background-color: #3b3b3b;
+}
+
+.random-planet .planet-image::before,
+.random-planet .planet-image::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+}
+
+.random-planet .planet-image::after {
+    content: "Упс... Сломаная.png";
+    padding: 0 1rem;
+    transform: translateY(-50%);
+    top: 50%;
+}
+
+.random-planet .planet-image::before {
+    content: "";
+    background: inherit;
+    font-size: 0;
+    height: 100%;
+    border: 1px solid #444;
 }
 
 .random-planet .list-group {
