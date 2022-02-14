@@ -105,7 +105,6 @@
     display: inline-block;
     overflow: hidden;
     background: none;
-    transform: translate(500px, 0);
 }
 
 .ldio-6jq4ek1njku {
@@ -119,4 +118,9 @@
 
 .ldio-6jq4ek1njku div {
     box-sizing: content-box;
+}
+
+/* Центрирование лоадера для 'random-planet' */
+.random-planet .loadingio-spinner-double-ring-yspenyd33nr {
+    transform: translate(500px, 0);
 }

@@ -50,3 +50,7 @@
 .random-planet .list-group-item .term {
     margin-right: 0.5rem;
 }
+
+.jumbotron {
+    margin-bottom: 1rem;
+}
