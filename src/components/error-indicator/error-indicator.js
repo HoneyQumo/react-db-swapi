@@ -7,9 +7,9 @@ const ErrorIndicator = () => {
     return (
         <div className="error-indicator">
             <img src={iconError} alt='' />
-            <span className="boom">Ooops!</span>
+            <span className="boom">OOOPS!</span>
             <span>
-                Упс... Что-то пошло не так
+                Болтики открутились...
             </span>
             <span>
                 (дройды уже чинят ༼ つ ◕_◕ ༽つ)
