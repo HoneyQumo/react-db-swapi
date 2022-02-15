@@ -9,7 +9,8 @@ export default class PersonDetails extends Component {
     swapiService = new SwapiService();
 
     state = {
-        person: null
+        person: {},
+        loading: false
     }
 
     componentDidMount() {
@@ -19,6 +20,9 @@ export default class PersonDetails extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.personId !== prevProps.personId) {
             this.updatePerson();
+            this.setState({
+                loading: true
+            })
         }
     }
 
@@ -32,43 +36,62 @@ export default class PersonDetails extends Component {
         this.swapiService
             .getPerson(personId)
             .then((person) => {
-                this.setState({ person });
+                this.setState({
+                    person,
+                    loading: false
+                });
             });
     }
 
     render() {
+        const { person, loading } = this.state;
+        const { personId } = this.props;
 
-        if (!this.state.person) {
-            return <span>Выберите персонажа из списка</span>;
-        }
+        const hasData = !loading && personId;
 
-        const { id, name, gender, birthYear, eyeColor } = this.state.person;
+        const choose = !personId ? <span className="list-group-item rounded">Выберите персонажа из списка</span> : null;
+        const content = hasData ? <ShowPerson person={person} /> : null;
+        const spinner = loading ? <Spinner /> : null;
 
         return (
-            <div className="person-details card">
-                <img
-                    className="person-image"
-                    alt=""
-                    src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
-                />
-                <div className="card-body">
-                    <h4>{name} {this.props.personId}</h4>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <span className="term">Gender</span>
-                            <span>{gender}</span>
-                        </li>
-                        <li className="list-group-item">
-                            <span className="term">Birth Year</span>
-                            <span>{birthYear}</span>
-                        </li>
-                        <li className="list-group-item">
-                            <span className="term">Eye Color</span>
-                            <span>{eyeColor}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <React.Fragment>
+                {choose}
+                {spinner}
+                {content}
+            </React.Fragment>
         );
     }
 }
+
+
+const ShowPerson = ({ person }) => {
+
+    const { id, name, gender, birthYear, eyeColor } = person;
+
+    return (
+        <div className="person-details card">
+            <img
+                className="person-image"
+                alt=""
+                src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+            />
+            <div className="card-body">
+                <h4>{name}</h4>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item">
+                        <span className="term">Gender</span>
+                        <span>{gender}</span>
+                    </li>
+                    <li className="list-group-item">
+                        <span className="term">Birth Year</span>
+                        <span>{birthYear}</span>
+                    </li>
+                    <li className="list-group-item">
+                        <span className="term">Eye Color</span>
+                        <span>{eyeColor}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    );
+};

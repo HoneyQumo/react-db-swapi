@@ -31,8 +31,7 @@ export default class RandomPlanet extends Component {
 
     onError = (err) => {
         this.setState({
-            error: true,
-            loading: false
+            error: true
         });
     };
 
