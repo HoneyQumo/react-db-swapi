@@ -1,51 +1,63 @@
 export default class SwapiService {
 
     _apiBase = 'https://swapi.dev/api';
+    _imageBase = 'https://starwars-visualguide.com/assets/img';
 
-    async getResource(url) {
+    getResource = async (url) => {
         const res = await fetch(`${this._apiBase}${url}`);
         if (!res.ok) {
             throw new Error(`Не удалось получить ${url}` +
                 `, код ответа: ${res.status}`)
         }
         return await res.json();
-    }
+    };
 
-    async getAllPeople() {
+    getAllPeople = async () => {
         const res = await this.getResource(`/people/`);
         return res.results.map(this._tranformPerson);
-    }
+    };
 
-    async getPerson(id) {
+    getPerson = async (id) => {
         const person = await this.getResource(`/people/${id}/`);
         return this._tranformPerson(person);
-    }
+    };
 
-    async getAllPlanets() {
+    getAllPlanets = async () => {
         const res = await this.getResource(`/planets/`);
         return res.results.map(this._tranformPlanet);
-    }
+    };
 
-    async getPlanet(id) {
+    getPlanet = async (id) => {
         const planet = await this.getResource(`/planets/${id}/`);
         return this._tranformPlanet(planet);
-    }
+    };
 
-    async getAllStarships() {
+    getAllStarships = async () => {
         const res = await this.getResource(`/starships/`);
         return res.results.map(this._tranformStarship);
-    }
+    };
 
-    async getStarship(id) {
+    getStarship = async (id) => {
         const starship = await this.getResource(`/starships/${id}/`);
         return this._tranformStarship(starship);
-    }
+    };
 
-    _extractId(item) {
+    getPersonImage = ({ id }) => {
+        return `${this._imageBase}/characters/${id}.jpg`;
+    };
+
+    getStarshipImage = ({ id }) => {
+        return `${this._imageBase}/starships/${id}.jpg`;
+    };
+
+    getPlanetImage = ({ id }) => {
+        return `${this._imageBase}/planets/${id}.jpg`;
+    };
+
+    _extractId = (item) => {
         const idRegExp = /\/([0-9]*)\/$/;
         return item.url.match(idRegExp)[1];
-    }
-
+    };
     _tranformPlanet = (planet) => {
         return {
             id: this._extractId(planet),
