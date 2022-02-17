@@ -3,15 +3,27 @@ import React, { Component } from "react";
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorBoundry from "../error-boundry";
-import SwapiService from "../../services/swapi-service";
-import Row from "../row";
+
 import ItemDetails, { Record } from "../item-details";
+// import SwapiService from "../../services/swapi-service";
+import DummySwapiService from "../../services/dummy-swapi-service";
+import { SwapiServiceProvider } from "../swapi-service-context";
+
+import {
+    PersonList,
+    PlanetList,
+    StarshipList,
+    PersonDetails,
+    PlanetDetails,
+    StarshipDetails
+} from '../sw-components';
+
 
 import './app.css';
 
 export default class App extends Component {
 
-    swapiService = new SwapiService();
+    swapiService = new DummySwapiService();
 
     state = {
         showRandomPlanet: true
@@ -29,7 +41,12 @@ export default class App extends Component {
 
         const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
-        const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+        const { getPerson,
+            getStarship,
+            getPersonImage,
+            getStarshipImage,
+            getAllPeople,
+            getAllPlanets } = this.swapiService;
 
         const personDetails = (
             <ItemDetails
@@ -39,8 +56,10 @@ export default class App extends Component {
             >
                 <Record field='gender' label='Gender' />
                 <Record field='eyeColor' label='Eye Color' />
+
             </ItemDetails>
         );
+
         const starshipDetails = (
             <ItemDetails
                 itemId={5}
@@ -56,26 +75,23 @@ export default class App extends Component {
 
         return (
             <ErrorBoundry>
-                <div>
-                    <Header />
-                    {/* {planet}
+                <SwapiServiceProvider value={this.swapiService}>
+                    <div>
+                        <Header />
 
-                    <div className="button-row">
-                        <button
-                            className="toggle-planet btn btn-secondary btn-md"
-                            onClick={this.toggleRandomPlanet}>
-                            Toggle Random Planet
-                        </button>
-                        <ErrorButton />
+                        <PersonDetails itemId={11} />
+
+                        <PlanetDetails itemId={4} />
+
+                        <StarshipDetails itemId={9} />
+
+                        <PersonList />
+
+                        <StarshipList />
+
+                        <PlanetList />
                     </div>
-                    <PeoplePage /> */}
-
-                    <Row
-                        left={personDetails}
-                        right={starshipDetails}
-                    />
-
-                </div>
+                </SwapiServiceProvider>
             </ErrorBoundry>
         );
     }

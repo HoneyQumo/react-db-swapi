@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import './item-details.css';
-import SwapiService from "../../services/swapi-service";
 import Spinner from '../spinner';
 import ErrorButton from '../error-button';
 
@@ -20,8 +19,6 @@ export { Record };
 
 
 export default class ItemDetails extends Component {
-
-    swapiService = new SwapiService();
 
     state = {
         item: {},
@@ -92,7 +89,7 @@ export default class ItemDetails extends Component {
 
 const ShowItem = ({ item, image, children }) => {
 
-    const { id, name, gender, birthYear, eyeColor } = item;
+    const { name } = item;
 
     return (
         <div className="item-details card">
