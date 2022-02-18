@@ -10,9 +10,9 @@ import {
 
 export {
     PersonList,
-    PlanetList,
-    StarshipList,
     PersonDetails,
+    PlanetList,
     PlanetDetails,
+    StarshipList,
     StarshipDetails
 };
