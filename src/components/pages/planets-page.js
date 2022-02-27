@@ -17,10 +17,13 @@ export default class PlanetsPage extends Component {
         const { selectedItem } = this.state;
 
         return (
-            <Row
-                left={<PlanetList onItemSelected={this.onItemSelected} />}
-                right={<PlanetDetails itemId={selectedItem} />}
-            />
+            <React.Fragment>
+                <h2>Планеты</h2>
+                <Row
+                    left={<PlanetList onItemSelected={this.onItemSelected} />}
+                    right={<PlanetDetails itemId={selectedItem} />}
+                />
+            </React.Fragment>
         );
     }
 }

@@ -7,6 +7,7 @@ import SwapiService from "../../services/swapi-service";
 import DummySwapiService from "../../services/dummy-swapi-service";
 import { SwapiServiceProvider } from "../swapi-service-context";
 import { PeoplePage, PlanetsPage, StarshipsPage } from "../pages";
+import { StarshipDetails } from "../sw-components";
 
 import './app.css';
 
@@ -43,9 +44,11 @@ export default class App extends Component {
                             <RandomPlanet />
 
                             <Routes>
+                                <Route path="/" element={<h2>Добро пожаловать на StarWars DB!</h2>} />
                                 <Route path="/people" element={<PeoplePage />} />
                                 <Route path="/planets" element={<PlanetsPage />} />
                                 <Route path="/starships" element={<StarshipsPage />} />
+                                <Route path="/starships/:id" element={<StarshipDetails />} />
                             </Routes>
 
                         </div>
